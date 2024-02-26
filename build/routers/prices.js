@@ -5,7 +5,7 @@ import express from "express";
 import { accessDenied, incorrectData, noExistData } from '../functions/other.js';
 import { priceServiceProvider } from '../options.js';
 import { PriceService } from '../services/priceService.js';
-import { isAdminAtLeast, isClientAtLeast } from '../functions/user.js';
+import { isClientAtLeast, isEditorAtLeast } from '../functions/user.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
@@ -17,7 +17,7 @@ router.get("/pricelist", async (req, res) => {
     res.json(result);
 });
 router.put("/pricelist", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, caption, price, code, id, markup } = req.body;
     const result = await updatePriceList({ name, caption, price, code, id, markup });

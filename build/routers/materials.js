@@ -5,7 +5,7 @@ import express from "express";
 import { accessDenied, moveFile } from '../functions/other.js';
 import { MaterialService } from '../services/materialService.js';
 import { materialServiceProvider } from '../options.js';
-import { isAdminAtLeast } from '../functions/user.js';
+import { isEditorAtLeast } from '../functions/user.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
@@ -17,7 +17,7 @@ router.get("/profiles", async (req, res) => {
     res.status(result.status).json(result);
 });
 router.delete("/profile", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, type } = req.body;
     let result;
@@ -26,7 +26,7 @@ router.delete("/profile", async (req, res) => {
     res.status(status).json(result);
 });
 router.post("/profile", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, type, code } = req.body;
     const result = await addProfile({ name, type, code });
@@ -34,7 +34,7 @@ router.post("/profile", async (req, res) => {
     res.status(status).json(result);
 });
 router.put("/profile", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, type, newName, code } = req.body;
     const result = await updateProfile({ name, type, newName, code });
@@ -47,14 +47,14 @@ router.get("/materials", async (req, res) => {
     res.status(result.status).json(result);
 });
 router.delete("/material", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, material } = req.body;
     const result = await deleteExtMaterial(name, material);
     res.status(result.status).json(result);
 });
 router.post("/material", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, material, code } = req.body;
     const image = req.files?.image;
@@ -67,7 +67,7 @@ router.post("/material", async (req, res) => {
     res.sendStatus(result.status);
 });
 router.put("/material", async (req, res) => {
-    if (!isAdminAtLeast(req.userRole))
+    if (!isEditorAtLeast(req.userRole))
         return accessDenied(res);
     const { name, material, newName, code } = req.body;
     const image = req.files?.image;

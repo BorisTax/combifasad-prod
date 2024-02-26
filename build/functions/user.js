@@ -3,7 +3,7 @@ export function isClientAtLeast(role) {
     return isManagerAtLeast(role) || role === UserRoles.CLIENT;
 }
 export function isManagerAtLeast(role) {
-    return isAdminAtLeast(role) || role === UserRoles.MANAGER;
+    return isEditorAtLeast(role) || role === UserRoles.MANAGER;
 }
 export function isEditorAtLeast(role) {
     return isAdminAtLeast(role) || role === UserRoles.EDITOR;
