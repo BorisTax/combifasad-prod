@@ -64,7 +64,7 @@ router.post("/material", async (req, res) => {
     const moveResult = await moveFile(sourcefile, destfile);
     imageurl = moveResult.copy ? imageurl : "";
     const result = await addExtMaterial({ name, material, image: imageurl, code });
-    res.sendStatus(result.status);
+    res.status(result.status).json(result);
 });
 router.put("/material", async (req, res) => {
     if (!isEditorAtLeast(req.userRole))
@@ -77,7 +77,7 @@ router.put("/material", async (req, res) => {
     const moveResult = await moveFile(sourcefile, destfile);
     imageurl = moveResult.copy ? imageurl : "";
     const result = await updateExtMaterial({ name, material, newName, image: imageurl, code });
-    res.json(result);
+    res.status(result.status).json(result);
 });
 export async function getExtMaterials() {
     const materialService = new MaterialService(materialServiceProvider);
