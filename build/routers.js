@@ -9,5 +9,5 @@ router.use('/materials', materialRouter);
 router.use('/prices', priceRouter);
 router.use('/database', databaseRouter);
 router.get('/version', (req, res) => {
-    res.status(200).json({ success: true, data: "0.1.7" });
+    res.status(200).json({ success: true, data: "0.1.9" });
 });
