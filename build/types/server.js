@@ -9,6 +9,7 @@ export var UserRoles;
 export var TableFields;
 (function (TableFields) {
     TableFields["NAME"] = "name";
+    TableFields["DATA"] = "data";
     TableFields["MATERIAL"] = "material";
     TableFields["IMAGE"] = "image";
     TableFields["CODE"] = "code";
@@ -19,4 +20,5 @@ export var TableFields;
     TableFields["ID"] = "id";
     TableFields["PRICE"] = "price";
     TableFields["MARKUP"] = "markup";
+    TableFields["TABLE"] = "table";
 })(TableFields || (TableFields = {}));
